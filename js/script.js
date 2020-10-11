@@ -246,7 +246,5 @@ function generateId() {
 function checkEmptyList(list, container) {
     if (list.length === 0) {
         container.textContent = 'Список пуст';
-    } else {
-        container.textContent = '';
     }
 }
