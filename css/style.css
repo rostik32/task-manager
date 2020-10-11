@@ -142,3 +142,14 @@ body {
 .new-task__back:hover {
   color: #d4d4d4;
 }
+
+@media (max-width: 575px) {
+  .new-task__title-edit {
+    font-size: 25px;
+    padding-right: 60px;
+  }
+
+  .new-task__back {
+    font-size: 35px;
+  }
+}
