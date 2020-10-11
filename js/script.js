@@ -19,8 +19,13 @@ if (path.includes('newTask')) {
 function renderCard() {
     const cardsList = document.querySelector('.task-manager__cards');
     const tasks = getLocalStorage('tasks');
-    
-    checkEmptyList(tasks, cardsList);
+
+    if (tasks.length === 0) {
+        cardsList.textContent = 'Список пуст';
+
+    } else {
+        cardsList.textContent = '';
+    }
 
     tasks.forEach(({ id, title, description, timestamp }) => {
         const date = new Date(+timestamp);
@@ -71,10 +76,13 @@ function renderCard() {
                 }
             });
 
-            
+
             tasks.splice(index, 1)
             setLocalStorage('tasks', tasks);
-            checkEmptyList(tasks, cardsList);
+
+            if (tasks.length === 0) {
+                cardsList.textContent = 'Список пуст';
+            }
 
         });
     });
@@ -130,11 +138,11 @@ function addNewTask(e) {
     setLocalStorage('tasks', getData);
     taskMessage.classList.add('created');
 
-    setInterval( () => {
+    setInterval(() => {
         taskMessage.classList.remove('created');
     }, 3000);
-        
-    
+
+
 }
 
 function editTask() {
@@ -182,7 +190,7 @@ function editTask() {
 
     taskDelete.addEventListener('click', () => {
         let tasksData = getLocalStorage('tasks');
-        let index = 0;    
+        let index = 0;
 
         tasksData.forEach((item, i) => {
             if (item.id === idTask) {
@@ -243,8 +251,4 @@ function generateId() {
 
 }
 
-function checkEmptyList(list, container) {
-    if (list.length === 0) {
-        container.textContent = 'Список пуст';
-    }
-}
+
