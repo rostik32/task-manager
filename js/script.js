@@ -19,7 +19,8 @@ if (path.includes('newTask')) {
 function renderCard() {
     const cardsList = document.querySelector('.task-manager__cards');
     const tasks = getLocalStorage('tasks');
-    cardsList.textContent = '';
+    
+    checkEmptyList(tasks, cardsList);
 
     tasks.forEach(({ id, title, description, timestamp }) => {
         const date = new Date(+timestamp);
@@ -70,8 +71,10 @@ function renderCard() {
                 }
             });
 
+            
             tasks.splice(index, 1)
             setLocalStorage('tasks', tasks);
+            checkEmptyList(tasks, cardsList);
 
         });
     });
@@ -240,4 +243,10 @@ function generateId() {
 
 }
 
-
+function checkEmptyList(list, container) {
+    if (list.length === 0) {
+        container.textContent = 'Список пуст';
+    } else {
+        container.textContent = '';
+    }
+}
